@@ -3,7 +3,6 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
-#dfhviudfv
 class AlienInvasion:
     """Clase general para gestionar los recursos y el comportamiento del juego."""
 
