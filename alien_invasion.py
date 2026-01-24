@@ -3,7 +3,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
-
+from alien import Alien
 class AlienInvasion:
     """Clase general para gestionar los recursos y el comportamiento del juego."""
 
@@ -22,6 +22,9 @@ class AlienInvasion:
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
         
 
     def run_game(self):
@@ -76,6 +79,25 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <=0:
                 self.bullets.remove(bullet)
+    
+    def _create_fleet(self):
+        """Crea la flota de aliens"""
+        #Crea un alienigena y va añadiendo alienigenas hasta que no haya espacio.
+        #La distancia entre alienigenas es equivalente al ancho de un extraterrestre.
+        alien = Alien(self)
+        alien_width = alien.rect.width
+
+        current_x = alien_width
+        while current_x < (self.settings.screen_width - 2 * alien_width):
+            self._create_alien(current_x)
+            current_x +=2 * alien_width
+            
+    def _create_alien(self, x_position):
+        """Crea un alienigena y lo coloca en la fila"""
+        new_alien = Alien(self)
+        new_alien.x = x_position
+        new_alien.rect.x = x_position
+        self.aliens.add(new_alien)
 
 
     def _update_screen(self):
@@ -84,6 +106,7 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.ship.blitme()
+        self.aliens.draw(self.screen)
 
         pygame.display.flip()
 
