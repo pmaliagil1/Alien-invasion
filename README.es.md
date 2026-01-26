@@ -3,6 +3,8 @@
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Pygame](https://img.shields.io/badge/pygame-000000?style=for-the-badge&logo=python&logoColor=white)
 
+> **Leer en otro idioma:** > **[English (Inglés)](README.md)**
+
 Este proyecto es un videojuego estilo Arcade desarrollado en **Python** utilizando la librería **Pygame**. Representa un hito importante en mi formación, donde he aplicado conceptos avanzados de Programación Orientada a Objetos (POO) y gestión de eventos en tiempo real.
 
 ##  Personalización y Valor Añadido
