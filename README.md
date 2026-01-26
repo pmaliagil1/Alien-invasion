@@ -3,30 +3,33 @@
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Pygame](https://img.shields.io/badge/pygame-000000?style=for-the-badge&logo=python&logoColor=white)
 
-Este proyecto es un videojuego estilo Arcade desarrollado en **Python** utilizando la librería **Pygame**. Representa un hito importante en mi formación, donde he aplicado conceptos avanzados de Programación Orientada a Objetos (POO) y gestión de eventos en tiempo real.
+> **Read this in another language:** > **[Español (Spanish)](README.es.md)**
 
-##  Personalización y Valor Añadido
-Aunque la arquitectura base sigue las pautas del libro *Python Crash Course* de Eric Matthes, he llevado el proyecto más allá mediante:
+This project is an Arcade-style video game developed in **Python** using the **Pygame** library. It represents a significant milestone in my training, where I applied advanced Object-Oriented Programming (OOP) concepts and real-time event management.
 
-* **Sprites Propios:** Sustitución de los elementos visuales originales para una identidad personalizada.
-* **Ajustes Técnicos:** Recalibración de la resolución de pantalla y constantes de velocidad ($v$) para mejorar la jugabilidad.
-* **Refactorización:** Organización del código para facilitar la escalabilidad de futuras funciones.
+## 🚀 Customization and Added Value
+While the base architecture follows the guidelines from Eric Matthes' book *Python Crash Course*, I have taken the project further by:
 
-##  Tecnologías y Requisitos
-* **Lenguaje:** Python 3.x
-* **Librerías:** Pygame
+* **Custom Sprites:** Replaced the original visual elements for a personalized identity.
+* **Technical Adjustments:** Recalibrated screen resolution and velocity constants ($v$) to improve gameplay.
+* **Refactoring:** Organized the code to facilitate the scalability of future features.
 
-##  Instalación y Uso
+## 🛠️ Technologies and Requirements
+* **Language:** Python 3.x
+* **Library:** Pygame
 
-Para probar el juego localmente, sigue estos pasos desde tu terminal:
+## 💻 Installation and Usage
 
-1. **Clonar el repositorio:**
+To test the game locally, follow these steps from your terminal:
+
+1. **Clone the repository:**
    ```bash
-    git clone https://github.com/pmaliagil1/Alien-invasion.git
-2. **Instalar dependencias:**
+   git clone [https://github.com/pmaliagil1/Alien-invasion.git](https://github.com/pmaliagil1/Alien-invasion.git)
+
+2. **Install dependencies::**
    ```bash
     pip install pygame
 
-3. **Lanzar el juego:**
+3. **Launch the game:**
    ```bash
     python alien_invasion.py
