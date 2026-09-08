@@ -1,5 +1,7 @@
 # Alien Invasion - Space Invaders Clone
 
+**PROYECTO NO TERMINADO**
+
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Pygame](https://img.shields.io/badge/pygame-000000?style=for-the-badge&logo=python&logoColor=white)
 
