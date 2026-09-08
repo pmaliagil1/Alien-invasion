@@ -1,9 +1,12 @@
 import sys
+from time import sleep
 import pygame
 from settings import Settings
+from game_stats import GameStats
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+
 class AlienInvasion:
     """Clase general para gestionar los recursos y el comportamiento del juego."""
 
@@ -20,20 +23,29 @@ class AlienInvasion:
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
 
+        #Crea una instancia para guardar las estadisticas del juego
+        self.stats = GameStats(self)
+
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
 
         self._create_fleet()
+
+        #Inicia Alien Invasion en estado activo
+        self.game_active = True
         
 
     def run_game(self):
         """Inicia el bucle principal para el juego"""
         while True:
             self._check_events()
-            self.ship.update()
-            self._update_bullets()
-            self._update_aliens()
+
+            if self.game_active:
+                self.ship.update()
+                self._update_bullets()
+                self._update_aliens()
+                
             self._update_screen()
             self.clock.tick(60)
 
@@ -100,6 +112,41 @@ class AlienInvasion:
         self._check_fleet_edges()
         """Actualiza las posiciones de todos los aliens de la flota"""
         self.aliens.update()
+
+        #Busca colisiones alien-nave
+        if pygame.sprite.spritecollideany(self.ship,self.aliens):
+            self._ship_hit()
+
+        #Busca aliens llegando al fondo de la pantalla
+        self._check_aliens_bottom()
+
+    def _ship_hit(self):
+        """Responde al impacto de un alien en la nave"""
+        if self.stats.ships_left >0:
+            #Disminuye ships_left
+            self.stats.ships_left -=1
+
+            #Se deshace de los aliens y balas restantes
+            self.aliens.empty()
+            self.bullets.empty()
+
+            #Crea una flota nueva y centra la nave
+            self._create_fleet()
+            self.ship.center_ship()
+
+            #pausa
+            sleep(0.5)
+
+        else:
+            self.game_active = False
+
+    def _check_aliens_bottom(self):
+        """Comprueba si algun alien ha llegado al fondo de la pantalla"""
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= self.settings.screen_height:
+                #Trata esto como si la nave hubiese sido alcanzada
+                self._ship_hit()
+                break
     
     def _create_fleet(self):
         """Crea la flota de aliens"""
