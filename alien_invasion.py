@@ -13,11 +13,11 @@ class AlienInvasion:
         self.clock = pygame.time.Clock()
         self.settings = Settings()
         #PARA MODO VENTANA:
-        self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height))
+        """self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height))"""
         #PARA MODO PANTALLA COMPLETA:
-        """self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_rect().width
-        self.settings.screen_height = self.screen.get_rect().height"""
+        self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)
@@ -33,6 +33,7 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()
             self.clock.tick(60)
 
@@ -79,6 +80,12 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <=0:
                 self.bullets.remove(bullet)
+
+    def _update_aliens(self):
+        """Comprueba si la flota esta en un borde, despues actualiza las posiciones"""
+        self._check_fleet_edges()
+        """Actualiza las posiciones de todos los aliens de la flota"""
+        self.aliens.update()
     
     def _create_fleet(self):
         """Crea la flota de aliens"""
@@ -104,6 +111,19 @@ class AlienInvasion:
         new_alien.rect.x = x_position
         new_alien.rect.y = y_position
         self.aliens.add(new_alien)
+
+    def  _check_fleet_edges(self):
+        """Responde adecuadamente si algun alien ha llegado a un borde"""
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+
+    def _change_fleet_direction(self):
+        """Baja toda la flota y cambia su direccion"""
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
 
 
     def _update_screen(self):
