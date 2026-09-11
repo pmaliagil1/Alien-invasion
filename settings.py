@@ -9,7 +9,7 @@ class Settings:
         self.bg_color = (230,230,230)
 
         #Configuracion de la nave
-        self.ship_limit = 3
+        self.ship_limit = 2
 
         #Configuración de las balas
         self.bullet_width = 3

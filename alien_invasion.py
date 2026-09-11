@@ -79,6 +79,7 @@ class AlienInvasion:
             self.stats.reset_stats()
             self.game_active = True
             self.sb.prep_score()
+            self.sb.prep_level()
 
             #Se deshace de los aliens y las balas que quedan
             self.aliens.empty()
@@ -138,12 +139,17 @@ class AlienInvasion:
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
+            self.sb.check_high_scoreboard()
 
         if not self.aliens:
             #Destruye las balas existentes y crea una flota nueva
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+
+            #Aumenta el nivel
+            self.stats.level +=1
+            self.sb.prep_level()
 
     def _update_aliens(self):
         """Comprueba si la flota esta en un borde, despues actualiza las posiciones"""
